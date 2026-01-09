@@ -15,6 +15,18 @@ import { dnssecExecute, dnsSettingsExecute } from './DnsExecute';
 import { dnsBatchExecute, dnsScanExecute } from './DnsExtendedExecute';
 import { getZones, getAccounts } from '../shared/SharedMethods';
 
+// Merged from CloudflareDnsAnalytics
+import { dnsAnalyticsOperations, dnsAnalyticsFields } from '../CloudflareDnsAnalytics/DnsAnalyticsDescription';
+import { dnsAnalyticsExecute } from '../CloudflareDnsAnalytics/DnsAnalyticsExecute';
+
+// Merged from CloudflareDnsFirewall
+import { dnsFirewallOperations, dnsFirewallFields } from '../CloudflareDnsFirewall/DnsFirewallDescription';
+import { dnsFirewallExecute } from '../CloudflareDnsFirewall/DnsFirewallExecute';
+
+// Merged from CloudflareSecondaryDns
+import { secondaryDnsOperations, secondaryDnsFields } from '../CloudflareSecondaryDns/SecondaryDnsDescription';
+import { secondaryDnsExecute } from '../CloudflareSecondaryDns/SecondaryDnsExecute';
+
 export class CloudflareDns implements INodeType {
 	methods = {
 		loadOptions: {
@@ -30,7 +42,7 @@ export class CloudflareDns implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Manage Cloudflare DNS records, DNSSEC, and settings',
+		description: 'Manage Cloudflare DNS records, DNSSEC, settings, analytics, firewall, and secondary DNS',
 		defaults: {
 			name: 'Cloudflare DNS',
 		},
@@ -61,6 +73,14 @@ export class CloudflareDns implements INodeType {
 						value: 'batch',
 					},
 					{
+						name: 'DNS Analytic',
+						value: 'dnsAnalytics',
+					},
+					{
+						name: 'DNS Firewall',
+						value: 'dnsFirewall',
+					},
+					{
 						name: 'DNS Record',
 						value: 'dnsRecord',
 					},
@@ -76,9 +96,14 @@ export class CloudflareDns implements INodeType {
 						name: 'Scan',
 						value: 'scan',
 					},
+					{
+						name: 'Secondary DN',
+						value: 'secondaryDns',
+					},
 				],
 				default: 'dnsRecord',
 			},
+			// Original DNS resources
 			...dnsBatchOperations,
 			...dnsBatchFields,
 			...dnsRecordOperations,
@@ -89,6 +114,15 @@ export class CloudflareDns implements INodeType {
 			...dnsRecordFields,
 			...dnssecFields,
 			...dnsSettingsFields,
+			// Merged: DNS Analytics
+			...dnsAnalyticsOperations,
+			...dnsAnalyticsFields,
+			// Merged: DNS Firewall
+			...dnsFirewallOperations,
+			...dnsFirewallFields,
+			// Merged: Secondary DNS
+			...secondaryDnsOperations,
+			...secondaryDnsFields,
 		],
 	};
 
@@ -111,6 +145,12 @@ export class CloudflareDns implements INodeType {
 					result = await dnsSettingsExecute.call(this, i);
 				} else if (resource === 'scan') {
 					result = await dnsScanExecute.call(this, i);
+				} else if (resource === 'dnsAnalytics') {
+					result = await dnsAnalyticsExecute.call(this, i);
+				} else if (resource === 'dnsFirewall') {
+					result = await dnsFirewallExecute.call(this, i);
+				} else if (resource === 'secondaryDns') {
+					result = await secondaryDnsExecute.call(this, i);
 				} else {
 					throw new NodeOperationError(this.getNode(), `Unknown resource: ${resource}`, { itemIndex: i });
 				}

@@ -16,11 +16,33 @@ import {
 	serviceTokenOperations, serviceTokenFields,
 } from './ZeroTrustExtendedDescription';
 
+// Merged Phase 1
+import { zeroTrustConnectivityOperations, zeroTrustConnectivityFields } from '../CloudflareZeroTrustConnectivity/ZeroTrustConnectivityDescription';
+import { zeroTrustRiskScoringOperations, zeroTrustRiskScoringFields } from '../CloudflareZeroTrustRiskScoring/ZeroTrustRiskScoringDescription';
+
+// Merged Phase 2
+import { devicesOperations, devicesFields } from '../CloudflareDevices/DevicesDescription';
+import { dexOperations, dexFields } from '../CloudflareDex/DexDescription';
+import { tunnelsOperations, tunnelsFields } from '../CloudflareTunnels/TunnelsDescription';
+import { warpConnectorOperations, warpConnectorFields } from '../CloudflareWarpConnector/WarpConnectorDescription';
+import { teamnetOperations, teamnetFields } from '../CloudflareTeamnet/TeamnetDescription';
+
 import { accessApplicationExecute } from './ZeroTrustAccessApplicationExecute';
 import { gatewayExecute } from './ZeroTrustGatewayExecute';
 import {
 	identityProviderExecute, accessGroupExecute, serviceTokenExecute,
 } from './ZeroTrustExtendedExecute';
+
+// Merged Phase 1
+import { zeroTrustConnectivityExecute } from '../CloudflareZeroTrustConnectivity/ZeroTrustConnectivityExecute';
+import { zeroTrustRiskScoringExecute } from '../CloudflareZeroTrustRiskScoring/ZeroTrustRiskScoringExecute';
+
+// Merged Phase 2
+import { devicesExecute } from '../CloudflareDevices/DevicesExecute';
+import { dexExecute } from '../CloudflareDex/DexExecute';
+import { tunnelsExecute } from '../CloudflareTunnels/TunnelsExecute';
+import { warpConnectorExecute } from '../CloudflareWarpConnector/WarpConnectorExecute';
+import { teamnetExecute } from '../CloudflareTeamnet/TeamnetExecute';
 
 export class CloudflareZeroTrust implements INodeType {
 	description: INodeTypeDescription = {
@@ -30,7 +52,7 @@ export class CloudflareZeroTrust implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Manage Cloudflare Zero Trust (Access, Tunnels, Gateway)',
+		description: 'Manage Cloudflare Zero Trust (Access, Gateway, Tunnels, Devices, etc)',
 		defaults: {
 			name: 'Cloudflare Zero Trust',
 		},
@@ -65,6 +87,18 @@ export class CloudflareZeroTrust implements INodeType {
 						value: 'accessGroup',
 					},
 					{
+						name: 'Connectivity',
+						value: 'zeroTrustConnectivity',
+					},
+					{
+						name: 'Device',
+						value: 'device',
+					},
+					{
+						name: 'DEX',
+						value: 'dex',
+					},
+					{
 						name: 'Gateway Rule',
 						value: 'gatewayRule',
 					},
@@ -73,12 +107,29 @@ export class CloudflareZeroTrust implements INodeType {
 						value: 'identityProvider',
 					},
 					{
+						name: 'Risk Scoring',
+						value: 'zeroTrustRiskScoring',
+					},
+					{
 						name: 'Service Token',
 						value: 'serviceToken',
+					},
+					{
+						name: 'Tunnel (Cloudflared)',
+						value: 'tunnel',
+					},
+					{
+						name: 'Tunnel Route (Teamnet)',
+						value: 'teamnet',
+					},
+					{
+						name: 'WARP Connector',
+						value: 'warpConnector',
 					},
 				],
 				default: 'accessApplication',
 			},
+			// Original Zero Trust resources
 			...accessApplicationOperations,
 			...accessApplicationFields,
 			...accessGroupOperations,
@@ -89,6 +140,22 @@ export class CloudflareZeroTrust implements INodeType {
 			...identityProviderFields,
 			...serviceTokenOperations,
 			...serviceTokenFields,
+			// Merged Phase 1
+			...zeroTrustConnectivityOperations,
+			...zeroTrustConnectivityFields,
+			...zeroTrustRiskScoringOperations,
+			...zeroTrustRiskScoringFields,
+			// Merged Phase 2
+			...devicesOperations,
+			...devicesFields,
+			...dexOperations,
+			...dexFields,
+			...tunnelsOperations,
+			...tunnelsFields,
+			...warpConnectorOperations,
+			...warpConnectorFields,
+			...teamnetOperations,
+			...teamnetFields,
 		],
 	};
 
@@ -118,6 +185,20 @@ export class CloudflareZeroTrust implements INodeType {
 					result = await identityProviderExecute.call(this, i);
 				} else if (resource === 'serviceToken') {
 					result = await serviceTokenExecute.call(this, i);
+				} else if (resource === 'zeroTrustConnectivity') {
+					result = await zeroTrustConnectivityExecute.call(this, i);
+				} else if (resource === 'zeroTrustRiskScoring') {
+					result = await zeroTrustRiskScoringExecute.call(this, i);
+				} else if (resource === 'device') {
+					result = await devicesExecute.call(this, i);
+				} else if (resource === 'dex') {
+					result = await dexExecute.call(this, i);
+				} else if (resource === 'tunnel') {
+					result = await tunnelsExecute.call(this, i);
+				} else if (resource === 'warpConnector') {
+					result = await warpConnectorExecute.call(this, i);
+				} else if (resource === 'teamnet') {
+					result = await teamnetExecute.call(this, i);
 				} else {
 					throw new NodeOperationError(this.getNode(), `Unknown resource: ${resource}`, { itemIndex: i });
 				}

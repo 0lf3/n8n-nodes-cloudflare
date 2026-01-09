@@ -1,102 +1,143 @@
-# n8n-nodes-nodemation
+# n8n-nodes-cloudflare
 
-![n8n.io - Workflow Automation](https://raw.githubusercontent.com/n8n-io/n8n/master/assets/n8n-logo.png)
+[![CI](https://github.com/Automations-Project/n8n-nodes-cloudflare/actions/workflows/ci.yml/badge.svg)](https://github.com/Automations-Project/n8n-nodes-cloudflare/actions/workflows/ci.yml)
+[![n8n community node](https://img.shields.io/badge/n8n-community%20node-orange)](https://docs.n8n.io/integrations/community-nodes/)
+[![Cloudflare API](https://img.shields.io/badge/Cloudflare-API-F38020?logo=cloudflare)](https://developers.cloudflare.com/api/)
+[![n8n Nodes API](https://img.shields.io/badge/n8n%20Nodes%20API-v1-blue)](#contributing)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](#-contributing)
+[![npm version](https://img.shields.io/npm/v/n8n-nodes-cloudflare?logo=npm)](https://www.npmjs.com/package/n8n-nodes-cloudflare)
+[![npm downloads](https://img.shields.io/npm/dm/n8n-nodes-cloudflare?logo=npm)](https://www.npmjs.com/package/n8n-nodes-cloudflare)
+[![n8n Node version](https://img.shields.io/github/package-json/v/Automations-Project/n8n-nodes-cloudflare?logo=n8n&label=n8n%20node)](https://github.com/Automations-Project/n8n-nodes-cloudflare)
+[![Node.js compatibility](https://img.shields.io/badge/Node.js-%E2%89%A518.17-green?logo=node.js)](https://nodejs.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-4.8%2B-blue?logo=typescript)](https://www.typescriptlang.org)
+[![License](https://img.shields.io/github/license/Automations-Project/n8n-nodes-cloudflare)](LICENSE)
 
-Unlock the real power of n8n with advanced tools combined in one node.
+[![GitHub stars](https://img.shields.io/github/stars/Automations-Project/n8n-nodes-cloudflare?style=social)](https://github.com/Automations-Project/n8n-nodes-cloudflare/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/Automations-Project/n8n-nodes-cloudflare?style=social)](https://github.com/Automations-Project/n8n-nodes-cloudflare/network)
+[![GitHub issues](https://img.shields.io/github/issues/Automations-Project/n8n-nodes-cloudflare)](https://github.com/Automations-Project/n8n-nodes-cloudflare/issues)
+[![Last commit](https://img.shields.io/github/last-commit/Automations-Project/n8n-nodes-cloudflare)](https://github.com/Automations-Project/n8n-nodes-cloudflare/commits)
 
-## Features
+![Banner](intro.png)
 
-- ✅ **n8n API Client** - Direct access to n8n's REST API
-- ✅ **n8n Internal API** - Advanced internal operations
-- ✅ **n8n Database Operations** - PostgreSQL direct access for advanced use cases
-  - Sync executions across n8n instances
-  - Advanced execution metadata management
-  - User and project management
-  - Role-based access control operations
-- ✅ **Fully Free** - Open source MIT license
+Comprehensive n8n community nodes for **Cloudflare** - manage your entire Cloudflare infrastructure from n8n workflows.
 
-## Installation
+## ✨ Features
 
-### Community Nodes (Recommended)
+| Category                | Services                                                       |
+| ----------------------- | -------------------------------------------------------------- |
+| **Core Infrastructure** | DNS, Zones, Cache, SSL/TLS, Page Rules                         |
+| **Developer Platform**  | Workers, Pages, D1, KV, R2, Queues, Durable Objects, Vectorize |
+| **Security**            | Firewall, WAF, Bot Management, Rate Limits, Zero Trust, Access |
+| **Media**               | Stream, Images, Calls                                          |
+| **Analytics**           | Radar, Logpush, RUM, DEX                                       |
+| **Networking**          | Load Balancer, Argo, Tunnels, Spectrum, Magic Transit          |
 
-1. Go to **Settings > Community Nodes**
-2. Select **Install**
-3. Enter `@automations-project/n8n-nodes-nodemation`
+**100+ Cloudflare API operations** with dynamic dropdowns for accounts, zones, and resources.
+
+## 📦 Installation
+
+### n8n Community Nodes (Recommended)
+
+1. Go to **Settings → Community Nodes**
+2. Click **Install**
+3. Enter: `n8n-nodes-cloudflare`
 4. Click **Install**
 
-### Manual Installation
+### npm
 
 ```bash
-npm install @automations-project/n8n-nodes-nodemation
+npm install n8n-nodes-cloudflare
 ```
 
-## Configuration
+## 🔑 Credentials
 
-### Credentials
+Create Cloudflare API credentials in n8n:
 
-The node requires **Nodemation API** credentials:
+1. Go to **Credentials → New**
+2. Search for **Cloudflare API**
+3. Enter your Cloudflare **API Token** or **API Key + Email**
 
-- **API URL**: Your n8n instance URL (e.g., `https://your-n8n-instance.com`)
-- **API Key**: n8n API key with appropriate permissions
-- **Database Connection** (for PG operations):
-  - Host, Port, Database name
-  - Username, Password
-  - SSL options
+**Recommended:** Use API Tokens with minimal required permissions.
 
-## Operations
+## 📚 Available Nodes
 
-### PostgreSQL Operations
+### Primary Nodes
 
-#### Sync Executions by Metadata
-Sync execution data between n8n instances using metadata key-value pairs.
+| Node                      | Description                                                    |
+| ------------------------- | -------------------------------------------------------------- |
+| **Cloudflare DNS**        | Manage DNS records, analytics, firewall, secondary DNS         |
+| **Cloudflare Workers**    | Deploy scripts, KV bindings, AI inference, dispatch namespaces |
+| **Cloudflare Zones**      | Zone settings, cache, page rules, waiting rooms, snippets      |
+| **Cloudflare Zero Trust** | Access apps, tunnels, devices, DEX, gateway rules              |
+| **Cloudflare Security**   | WAF rulesets, bot management, rate limits, page shield         |
+| **Cloudflare SSL**        | Certificates, mTLS, Origin CA, Total TLS                       |
 
-**Features:**
-- Batch processing with configurable batch sizes
-- Atomic or non-atomic transaction modes
-- Timestamp strategy options (preserve source or use destination)
-- Pagination-safe timestamp alignment
-- User role management with downgrade protection
-- Project and folder structure preservation
-- Execution data and metadata sync
+### Additional Nodes
 
-**Security Features:**
-- ✅ Role downgrade protection (global:owner never downgraded)
-- ✅ Privilege hierarchy enforcement
-- ✅ Transaction safety with rollback support
+R2 Storage, D1 Database, Pages, Stream, Images, Queues, Load Balancer, Registrar, Email Routing, Logpush, Radar, and 50+ more specialized nodes.
 
-## Use Cases
+## 🚀 Quick Start
 
-- **Multi-instance Management**: Sync data between production and staging
-- **Backup & Recovery**: Copy executions for audit trails
-- **Development Workflows**: Clone execution data for testing
-- **Team Collaboration**: Share execution history across teams
-- **Compliance**: Maintain execution records with proper metadata
+### Example: Update DNS Record
 
-## Version History
+```json
+{
+	"nodes": [
+		{
+			"name": "Cloudflare DNS",
+			"type": "n8n-nodes-cloudflare.cloudflareDns",
+			"parameters": {
+				"resource": "dnsRecord",
+				"operation": "update",
+				"zoneId": "{{ $json.zoneId }}",
+				"recordId": "{{ $json.recordId }}",
+				"content": "1.2.3.4"
+			}
+		}
+	]
+}
+```
 
-See [CHANGELOG.md](CHANGELOG.md) for detailed version history.
+## 🔧 Dynamic Dropdowns
 
-## Requirements
+All nodes feature dynamic dropdowns that load data from your Cloudflare account:
 
-- **Node.js**: >= 18.0.0
-- **n8n**: >= 1.0.0
-- **PostgreSQL**: 12+ (for database operations)
+- **Accounts** - Select from your Cloudflare accounts
+- **Zones** - Choose domains from your account
+- **Workers** - Pick deployed worker scripts
+- **R2 Buckets** - Select storage buckets
+- **KV Namespaces** - Choose key-value stores
+- **And more...**
 
-## License
+## 📋 Requirements
+
+- **n8n** >= 1.0.0
+- **Node.js** >= 18.17.0
+- **Cloudflare Account** with API access
+
+## 🤝 Contributing
+
+Contributions welcome! Please:
+
+1. Fork the repository
+2. Create a feature branch
+3. Submit a Pull Request
+
+## 🐛 Issues
+
+Found a bug? [Open an issue](https://github.com/automations-project/n8n-nodes-cloudflare/issues/new/choose)
+
+## 📄 License
 
 [MIT](LICENSE)
 
-## Support
+## 👤 Author
 
-- [Issues](https://github.com/Automations-Project/n8n-nodes-nodemation/issues)
-- [Documentation](https://github.com/Automations-Project/n8n-nodes-nodemation)
+**nskha** - [@automations-project](https://github.com/automations-project)
 
-## Contributing
+## 🔗 Links
 
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## Author
-
-**nskha**
-- GitHub: [@Automations-Project](https://github.com/Automations-Project)
-- Email: github-public@admins.mozmail.com
+- [npm Package](https://www.npmjs.com/package/n8n-nodes-cloudflare)
+- [GitHub Repository](https://github.com/automations-project/n8n-nodes-cloudflare)
+- [Cloudflare API Docs](https://developers.cloudflare.com/api/)
+- [n8n Community Nodes](https://docs.n8n.io/integrations/community-nodes/)

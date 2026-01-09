@@ -9,7 +9,7 @@ export const botManagementOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: {
 			show: {
-				resource: ['config'],
+				resource: ['config', 'botManagement'],
 			},
 		},
 		options: [
@@ -35,7 +35,7 @@ export const botManagementFields: INodeProperties[] = [
 		...zoneIdField,
 		displayOptions: {
 			show: {
-				resource: ['config'],
+				resource: ['config', 'botManagement'],
 			},
 		},
 	},
@@ -47,7 +47,7 @@ export const botManagementFields: INodeProperties[] = [
 		default: {},
 		displayOptions: {
 			show: {
-				resource: ['config'],
+				resource: ['config', 'botManagement'],
 				operation: ['update'],
 			},
 		},

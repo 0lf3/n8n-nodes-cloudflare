@@ -12,20 +12,35 @@ import { accessRuleOperations, accessRuleFields } from './FirewallAccessRuleDesc
 import { lockdownOperations, lockdownFields } from './LockdownDescription';
 import { uaRuleOperations, uaRuleFields } from './UaRuleDescription';
 
+import { botManagementOperations, botManagementFields } from '../CloudflareBotManagement/BotManagementDescription';
+import { filterOperations, filterFields } from '../CloudflareFilters/FilterDescription';
+import { leakedCredentialChecksOperations, leakedCredentialChecksFields } from '../CloudflareLeakedCredentialChecks/LeakedCredentialChecksDescription';
+import { pageShieldOperations, pageShieldFields } from '../CloudflarePageShield/PageShieldDescription';
+import { rateLimitOperations, rateLimitFields } from '../CloudflareRateLimits/RateLimitDescription';
+import {
+	rulesetOperations, rulesetFields,
+} from '../CloudflareRulesets/RulesetDescription';
+
 import { accessRuleExecute } from './FirewallAccessRuleExecute';
 import { lockdownExecute, uaRuleExecute } from './FirewallExecute';
+import { botManagementExecute } from '../CloudflareBotManagement/BotManagementExecute';
+import { filterExecute } from '../CloudflareFilters/FilterExecute';
+import { leakedCredentialChecksExecute } from '../CloudflareLeakedCredentialChecks/LeakedCredentialChecksExecute';
+import { pageShieldExecute } from '../CloudflarePageShield/PageShieldExecute';
+import { rateLimitsExecute } from '../CloudflareRateLimits/RateLimitsExecute';
+import { rulesetsExecute } from '../CloudflareRulesets/RulesetsExecute';
 
 export class CloudflareFirewall implements INodeType {
 	description: INodeTypeDescription = {
-		displayName: 'Cloudflare Firewall',
+		displayName: 'Cloudflare Security',
 		name: 'cloudflareFirewall',
 		icon: 'file:cloudflare.svg',
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Manage Cloudflare Firewall (Access Rules, Lockdowns, UA Rules)',
+		description: 'Manage Cloudflare Security (WAF, Firewall, Bots, Page Shield)',
 		defaults: {
-			name: 'Cloudflare Firewall',
+			name: 'Cloudflare Security',
 		},
 		inputs: ['main'],
 		outputs: ['main'],
@@ -50,26 +65,72 @@ export class CloudflareFirewall implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Access Rule',
+						name: 'Access Rule (IP/Country/ASN)',
 						value: 'accessRule',
 					},
 					{
-						name: 'Lockdown',
+						name: 'Bot Management',
+						value: 'botManagement',
+					},
+					{
+						name: 'Filter (Firewall)',
+						value: 'filter',
+					},
+					{
+						name: 'Leaked Credential Check',
+						value: 'leakedCredentialChecks',
+					},
+					{
+						name: 'Lockdown Rule',
 						value: 'lockdown',
 					},
 					{
-						name: 'User Agent Rule',
+						name: 'Page Shield',
+						value: 'pageShield',
+					},
+					{
+						name: 'Rate Limit',
+						value: 'rateLimit',
+					},
+					{
+						name: 'Ruleset (WAF/Transform)',
+						value: 'ruleset',
+					},
+					{
+						name: 'Ruleset Phase',
+						value: 'phase',
+					},
+					{
+						name: 'Ruleset Rule',
+						value: 'rule',
+					},
+					{
+						name: 'User-Agent Rule',
 						value: 'uaRule',
 					},
 				],
 				default: 'accessRule',
 			},
+			// Valid Firewall Resources
 			...accessRuleOperations,
-			...lockdownOperations,
-			...uaRuleOperations,
 			...accessRuleFields,
+			...lockdownOperations,
 			...lockdownFields,
+			...uaRuleOperations,
 			...uaRuleFields,
+			// Merged Security Resources
+			...botManagementOperations,
+			...botManagementFields,
+			...filterOperations,
+			...filterFields,
+			...leakedCredentialChecksOperations,
+			...leakedCredentialChecksFields,
+			...pageShieldOperations,
+			...pageShieldFields,
+			...rateLimitOperations,
+			...rateLimitFields,
+			...rulesetOperations,
+			...rulesetFields,
 		],
 	};
 
@@ -95,6 +156,22 @@ export class CloudflareFirewall implements INodeType {
 					result = await lockdownExecute.call(this, i);
 				} else if (resource === 'uaRule') {
 					result = await uaRuleExecute.call(this, i);
+				} else if (resource === 'botManagement') {
+					result = await botManagementExecute.call(this, i);
+				} else if (resource === 'filter') {
+					result = await filterExecute.call(this, i);
+				} else if (resource === 'leakedCredentialChecks') {
+					result = await leakedCredentialChecksExecute.call(this, i);
+				} else if (resource === 'pageShield') {
+					result = await pageShieldExecute.call(this, i);
+				} else if (resource === 'rateLimit') {
+					result = await rateLimitsExecute.call(this, i);
+				} else if (resource === 'ruleset') {
+					result = await rulesetsExecute.call(this, i);
+				} else if (resource === 'rule') {
+					result = await rulesetsExecute.call(this, i);
+				} else if (resource === 'phase') {
+					result = await rulesetsExecute.call(this, i);
 				} else {
 					throw new NodeOperationError(this.getNode(), `Unknown resource: ${resource}`, { itemIndex: i });
 				}

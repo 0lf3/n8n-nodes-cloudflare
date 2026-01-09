@@ -8,7 +8,7 @@ export const ipsOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: { show: { resource: ['ips'] } },
 		options: [
-			{ name: 'Get', value: 'get', description: 'Get Cloudflare IP ranges', action: 'Get cloudflare i ps' },
+			{ name: 'Get', value: 'get', description: 'Get Cloudflare IP ranges', action: 'Get cloudflare ips' },
 		],
 		default: 'get',
 	},

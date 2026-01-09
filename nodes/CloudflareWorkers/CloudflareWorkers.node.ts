@@ -22,6 +22,16 @@ import {
 } from './WorkersExtendedExecute';
 import { getAccounts, getZones, getWorkerScripts } from '../shared/SharedMethods';
 
+// Merged from CloudflareWorkersAI
+import { aiModelOperations, aiModelFields } from '../CloudflareWorkersAI/AiModelDescription';
+import { aiInferenceOperations, aiInferenceFields } from '../CloudflareWorkersAI/AiInferenceDescription';
+import { aiModelExecute } from '../CloudflareWorkersAI/AiModelExecute';
+import { aiInferenceExecute } from '../CloudflareWorkersAI/AiInferenceExecute';
+
+// Merged from CloudflareWorkersForPlatforms
+import { workersForPlatformsOperations, workersForPlatformsFields } from '../CloudflareWorkersForPlatforms/WorkersForPlatformsDescription';
+import { workersForPlatformsExecute } from '../CloudflareWorkersForPlatforms/WorkersForPlatformsExecute';
+
 export class CloudflareWorkers implements INodeType {
 	methods = {
 		loadOptions: {
@@ -38,7 +48,7 @@ export class CloudflareWorkers implements INodeType {
 		group: ['transform'],
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
-		description: 'Manage Cloudflare Workers scripts and cron triggers',
+		description: 'Manage Cloudflare Workers scripts, cron triggers, AI inference, and dispatch namespaces',
 		defaults: {
 			name: 'Cloudflare Workers',
 		},
@@ -65,16 +75,36 @@ export class CloudflareWorkers implements INodeType {
 				noDataExpression: true,
 				options: [
 					{
-						name: 'Script',
-						value: 'script',
+						name: 'AI Inference',
+						value: 'inference',
+					},
+					{
+						name: 'AI Model',
+						value: 'model',
 					},
 					{
 						name: 'Cron Trigger',
 						value: 'cronTrigger',
 					},
 					{
+						name: 'Deployment',
+						value: 'deployment',
+					},
+					{
+						name: 'Dispatch Namespace',
+						value: 'namespace',
+					},
+					{
+						name: 'Dispatch Script',
+						value: 'dispatchScript',
+					},
+					{
 						name: 'Route',
 						value: 'route',
+					},
+					{
+						name: 'Script',
+						value: 'script',
 					},
 					{
 						name: 'Secret',
@@ -84,13 +114,10 @@ export class CloudflareWorkers implements INodeType {
 						name: 'Version',
 						value: 'version',
 					},
-					{
-						name: 'Deployment',
-						value: 'deployment',
-					},
 				],
 				default: 'script',
 			},
+			// Original Workers resources
 			...workersScriptOperations,
 			...workersScriptFields,
 			...workersCronOperations,
@@ -103,6 +130,14 @@ export class CloudflareWorkers implements INodeType {
 			...workersVersionFields,
 			...workersDeploymentOperations,
 			...workersDeploymentFields,
+			// Merged: Workers AI
+			...aiInferenceOperations,
+			...aiInferenceFields,
+			...aiModelOperations,
+			...aiModelFields,
+			// Merged: Workers for Platforms
+			...workersForPlatformsOperations,
+			...workersForPlatformsFields,
 		],
 	};
 
@@ -127,6 +162,12 @@ export class CloudflareWorkers implements INodeType {
 					result = await workersVersionExecute.call(this, i);
 				} else if (resource === 'deployment') {
 					result = await workersDeploymentExecute.call(this, i);
+				} else if (resource === 'inference') {
+					result = await aiInferenceExecute.call(this, i);
+				} else if (resource === 'model') {
+					result = await aiModelExecute.call(this, i);
+				} else if (resource === 'namespace' || resource === 'dispatchScript') {
+					result = await workersForPlatformsExecute.call(this, i);
 				} else {
 					throw new NodeOperationError(this.getNode(), `Unknown resource: ${resource}`, { itemIndex: i });
 				}

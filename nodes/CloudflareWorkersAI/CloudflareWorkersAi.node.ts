@@ -24,6 +24,7 @@ export class CloudflareWorkersAi implements INodeType {
 		name: 'cloudflareWorkersAi',
 		icon: 'file:cloudflare.svg',
 		group: ['transform'],
+		hidden: true, // Merged into CloudflareWorkers node
 		version: 1,
 		subtitle: '={{$parameter["operation"] + ": " + $parameter["resource"]}}',
 		description: 'Run AI models on Cloudflare Workers AI',
