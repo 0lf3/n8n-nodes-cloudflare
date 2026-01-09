@@ -60,7 +60,7 @@ Research/
 # Development scripts
 fix_*.ps1
 test-pg-connection.js
-intro.png
+#intro.png
 
 # Windsurf/Cascade AI
 .windsurf/
