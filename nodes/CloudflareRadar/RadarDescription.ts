@@ -27,7 +27,7 @@ export const radarOperations: INodeProperties[] = [
 			{ name: 'Get Routes', value: 'getRoutes', description: 'Get BGP routes', action: 'Get BGP routes' },
 			{ name: 'Get Timeseries', value: 'getTimeseries', description: 'Get BGP timeseries', action: 'Get BGP timeseries' },
 			{ name: 'Get Top ASNs', value: 'getTopAsns', description: 'Get top ASNs by BGP', action: 'Get top bgp as ns' },
-{ name: 'Get Top Prefixes', value: 'getTopPrefixes', description: 'Get top prefixes', action: 'Get top prefixes' },
+
 		],
 		default: 'getRoutes',
 	},
@@ -55,7 +55,7 @@ export const radarOperations: INodeProperties[] = [
 		options: [
 			{ name: 'Get Layer 3 Timeseries', value: 'getLayer3Timeseries', description: 'Get L3 attack timeseries', action: 'Get L3 attacks' },
 			{ name: 'Get Layer 7 Timeseries', value: 'getLayer7Timeseries', description: 'Get L7 attack timeseries', action: 'Get L7 attacks' },
-{ name: 'Get Top Attack Vectors', value: 'getTopVectors', description: 'Get top attack vectors', action: 'Get top attack vectors' },
+
 			{ name: 'Get Top Industries', value: 'getTopIndustries', description: 'Get top targeted industries', action: 'Get top industries' },
 		],
 		default: 'getLayer3Timeseries',
@@ -94,9 +94,8 @@ export const radarOperations: INodeProperties[] = [
 		noDataExpression: true,
 		displayOptions: { show: { resource: ['entities'] } },
 		options: [
-			{ name: 'Get ASN Details', value: 'getAsnDetails', description: 'Get ASN details', action: 'Get ASN details' },
-			{ name: 'Get Location Details', value: 'getLocationDetails', description: 'Get location details', action: 'Get location details' },
-			{ name: 'List ASNs', value: 'listAsns', description: 'List all ASNs', action: 'List ASNs' },
+
+			{ name: 'List ASNs', value: 'listAsns', description: 'List all ASNs', action: 'List as ns' },
 			{ name: 'List Locations', value: 'listLocations', description: 'List all locations', action: 'List locations' },
 		],
 		default: 'listAsns',

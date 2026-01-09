@@ -16,6 +16,7 @@ scripts/*
 duplicate-report.json
 ecosystem.config.js
 docs
+.github\README.md
 
 # IDE
 .idea/

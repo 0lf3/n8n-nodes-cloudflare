@@ -276,7 +276,8 @@ export const waitingRoomRuleFields: INodeProperties[] = [
 		name: 'action',
 		type: 'options',
 		options: [
-			{ name: 'Bypass Waiting Room', value: 'bypass_waiting_room' },
+			{ name: 'Bypass Waiting Room', value: 'bypass_waiting_room',
+				action: 'Bypass waiting room a waiting room rule', },
 		],
 		default: 'bypass_waiting_room',
 		required: true,

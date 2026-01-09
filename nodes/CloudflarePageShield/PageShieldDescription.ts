@@ -11,6 +11,7 @@ export const pageShieldOperations: INodeProperties[] = [
 		options: [
 			{ name: 'Get Settings', value: 'getSettings', description: 'Get Page Shield settings', action: 'Get settings' },
 			{ name: 'Update Settings', value: 'updateSettings', description: 'Update Page Shield settings', action: 'Update settings' },
+
 			{ name: 'Get Many Scripts', value: 'listScripts', description: 'List detected scripts', action: 'List scripts' },
 			{ name: 'Get Script', value: 'getScript', description: 'Get a script', action: 'Get a script' },
 			{ name: 'Get Many Connections', value: 'listConnections', description: 'List detected connections', action: 'List connections' },
@@ -61,8 +62,8 @@ export const pageShieldFields: INodeProperties[] = [
 		name: 'action',
 		type: 'options',
 		options: [
-			{ name: 'Allow', value: 'allow' },
-			{ name: 'Log', value: 'log' },
+			{ name: 'Allow', value: 'allow', action: 'Allow a page shield' },
+			{ name: 'Log', value: 'log', action: 'Log a page shield' },
 		],
 		default: 'log',
 		displayOptions: { show: { resource: ['pageShield'], operation: ['createPolicy'] } },
