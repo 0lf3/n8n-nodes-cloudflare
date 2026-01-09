@@ -7,11 +7,16 @@ yarn.lock
 # Build outputs
 dist/
 *.tsbuildinfo
-scripts
+scripts/*
+!scripts/update-banner.js
+!scripts/banner.config
 .agent
 .windsurf
-.github
+#.github
+duplicate-report.json
+ecosystem.config.js
 docs
+
 # IDE
 .idea/
 .vscode/

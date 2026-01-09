@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 📚 n8n Documentation
+    url: https://docs.n8n.io/integrations/community-nodes/
+    about: Learn about n8n community nodes
+  - name: ☁️ Cloudflare API Docs
+    url: https://developers.cloudflare.com/api/
+    about: Official Cloudflare API documentation
+  - name: 💬 n8n Community Forum
+    url: https://community.n8n.io/
+    about: Ask questions on the n8n community forum

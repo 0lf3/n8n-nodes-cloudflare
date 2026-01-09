@@ -1,0 +1,55 @@
+name: ✨ Feature Request
+description: Suggest a new feature or Cloudflare API operation
+title: "[Feature]: "
+labels: ["enhancement"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for suggesting a feature! Please describe what you'd like to see.
+
+  - type: dropdown
+    id: type
+    attributes:
+      label: Request Type
+      options:
+        - New Cloudflare service/node
+        - New operation for existing node
+        - Improvement to existing operation
+        - New dynamic dropdown
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: service
+    attributes:
+      label: Cloudflare Service
+      description: Which Cloudflare product/service does this relate to?
+      placeholder: "e.g., Workers AI, Magic Transit, Hyperdrive"
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: Describe the feature and its use case
+      placeholder: |
+        I would like to be able to...
+        This would help me...
+    validations:
+      required: true
+
+  - type: input
+    id: api-endpoint
+    attributes:
+      label: Cloudflare API Endpoint (if known)
+      description: Link to relevant Cloudflare API documentation
+      placeholder: "https://developers.cloudflare.com/api/..."
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: Have you tried any workarounds?
