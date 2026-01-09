@@ -11,7 +11,7 @@ scripts
 .agent
 .windsurf
 .github
-
+docs
 # IDE
 .idea/
 .vscode/
