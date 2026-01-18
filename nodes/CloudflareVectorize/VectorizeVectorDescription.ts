@@ -67,7 +67,7 @@ export const vectorizeVectorFields: INodeProperties[] = [
 		type: 'options',
 		typeOptions: {
 			loadOptionsMethod: 'getVectorizeIndexes',
-		loadOptionsDependsOn: ['accountId'],
+			loadOptionsDependsOn: ['accountId'],
 		},
 		required: true,
 		default: '',
@@ -120,9 +120,26 @@ export const vectorizeVectorFields: INodeProperties[] = [
 			{
 				displayName: 'Return Metadata',
 				name: 'returnMetadata',
-				type: 'boolean',
-				default: true,
-				description: 'Whether to return vector metadata',
+				type: 'options',
+				options: [
+					{
+						name: 'All',
+						value: 'all',
+						description: 'Fetch all metadata (slower, topK limited to 20)',
+					},
+					{
+						name: 'Indexed Only',
+						value: 'indexed',
+						description: 'Fetch only indexed metadata fields (no latency overhead)',
+					},
+					{
+						name: 'None',
+						value: 'none',
+						description: 'Do not fetch metadata',
+					},
+				],
+				default: 'none',
+				description: 'What metadata to return with query results. When set to "All", topK is limited to 20.',
 			},
 			{
 				displayName: 'Return Values',
@@ -136,7 +153,11 @@ export const vectorizeVectorFields: INodeProperties[] = [
 				name: 'topK',
 				type: 'number',
 				default: 10,
-				description: 'Number of similar vectors to return',
+				typeOptions: {
+					minValue: 1,
+					maxValue: 100,
+				},
+				description: 'Number of similar vectors to return (1-100). Limited to 20 when Return Metadata is set to "All" or Return Values is enabled.',
 			},
 		],
 	},

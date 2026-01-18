@@ -21,7 +21,7 @@ export async function vectorizeVectorExecute(
 		const queryOptions = this.getNodeParameter('queryOptions', itemIndex) as {
 			topK?: number;
 			filter?: string;
-			returnMetadata?: boolean;
+			returnMetadata?: string;
 			returnValues?: boolean;
 		};
 
