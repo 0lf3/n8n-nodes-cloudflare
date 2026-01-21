@@ -670,3 +670,24 @@ export async function getIdentityProviders(this: ILoadOptionsFunctions): Promise
 	}
 }
 
+/**
+ * Get AI Search Instances for dropdown options
+ */
+export async function getAISearchInstances(this: ILoadOptionsFunctions): Promise<INodePropertyOptions[]> {
+	try {
+		const accountId = this.getNodeParameter('accountId', 0) as string;
+		if (!accountId) return [];
+		const response = await cloudflareApiRequest.call(this, 'GET', `/accounts/${accountId}/ai-search/instances`);
+		const instances = response as unknown as IDataObject[];
+
+		if (!Array.isArray(instances)) return [];
+
+		return instances.map((instance) => ({
+			name: instance.id as string,
+			value: instance.id as string,
+			description: `Source: ${instance.source || instance.type || 'unknown'}`,
+		}));
+	} catch {
+		return [];
+	}
+}

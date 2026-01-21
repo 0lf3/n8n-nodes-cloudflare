@@ -213,7 +213,8 @@
 			"dist/nodes/CloudflareWorkersForPlatforms/CloudflareWorkersForPlatforms.node.js",
 			"dist/nodes/CloudflareSecurityCenter/CloudflareSecurityCenter.node.js",
 			"dist/nodes/CloudflareInvites/CloudflareInvites.node.js",
-			"dist/nodes/CloudflareOrganizations/CloudflareOrganizations.node.js"
+			"dist/nodes/CloudflareOrganizations/CloudflareOrganizations.node.js",
+			"dist/nodes/CloudflareAISearch/CloudflareAiSearch.node.js"
 		]
 	},
 	"devDependencies": {
